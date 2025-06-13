@@ -67,7 +67,7 @@ function calculateElevationChange(points){
     }
   }
 
-  const THRESHOLD = 0.8; // 过滤微小波动的阈值（米）
+  const THRESHOLD = 0.8; // 过滤微小波动的阈值（米）这个阈值的设定需要再琢磨
   let climb = 0; // 总爬升高度
   let descent = 0; // 总下降高度
   let prevElevation = null; // 上一个点的高度
