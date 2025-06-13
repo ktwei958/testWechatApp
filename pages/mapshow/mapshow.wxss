@@ -1,0 +1,143 @@
+/* 上传按钮样式 */
+.upload-btn {
+  margin: 10rpx;
+  padding: 20rpx;
+  background: #2196F3;
+  color: white;
+  border-radius: 16rpx;
+  width: 80%; /* 可选：设置按钮宽度占容器的80% */
+  margin: 20rpx auto; /* 按钮水平居中 */
+}
+
+/* 地图容器样式（可选） */
+map {
+  margin-top: 20rpx;
+}
+
+.route-length {
+  margin-bottom: 20rpx; /* 总距离与按钮之间的间距 */
+  padding: 20rpx;
+  background: #f8f8f8;
+  text-align: center;
+  font-size: 32rpx;
+  color: #333;
+  margin: 20rpx 20rpx; /* 总距离四周间距 */
+  border-radius: 12rpx; /* 圆角 */
+}
+
+/* 整体容器样式 */
+.info-box {
+  width: 100%;
+  max-width: 700rpx;
+  margin: 0 auto 30rpx;
+  padding: 25rpx;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20rpx;
+  box-shadow: 
+    0 10rpx 30rpx rgba(56, 96, 236, 0.15),
+    inset 0 0 0 1rpx rgba(211, 223, 255, 0.6);
+  backdrop-filter: blur(8rpx);
+  border: 1rpx solid rgba(230, 238, 255, 0.7);
+}
+
+/* 信息行容器 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+/* 每个信息项 */
+.info-item {
+  flex: 1;
+  min-width: 300rpx;
+  padding: 16rpx 20rpx;
+  background: linear-gradient(90deg, #f8faff, #f0f6ff);
+  border-radius: 14rpx;
+  font-size: 28rpx;
+  color: #374a66;
+  margin: 0 12rpx;
+  box-shadow: 
+    0 2rpx 8rpx rgba(38, 82, 202, 0.07),
+    inset 0 0 0 1rpx rgba(200, 220, 255, 0.4);
+  display: flex;
+  align-items: center;
+}
+
+/* 信息图标 */
+.info-icon {
+  margin-right: 10rpx;
+  font-size: 34rpx;
+}
+
+/* 状态容器 */
+.status-container {
+  margin-top: 20rpx;
+}
+
+/* 状态项 */
+.status-item {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 25rpx;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  box-shadow: 
+    0 4rpx 12rpx rgba(0, 0, 0, 0.03),
+    inset 0 0 0 1rpx rgba(255, 255, 255, 0.5);
+  text-align: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* 在路线上的状态 */
+.on-track {
+  background: linear-gradient(90deg, #e8f7ee, #d8f4e5);
+  color: #1b9a5c;
+  border: 1rpx solid rgba(28, 168, 95, 0.2);
+}
+
+/* 偏离路线状态 */
+.deviated {
+  background: linear-gradient(90deg, #ffecec, #fff0f0);
+  color: #e43f3f;
+  border: 1rpx solid rgba(255, 109, 109, 0.25);
+  animation: pulse 1.2s infinite;
+}
+
+/* 非激活状态 */
+.inactive {
+  background: linear-gradient(90deg, #f0f0f5, #ececf0);
+  color: #7a8190;
+  border: 1rpx solid rgba(180, 185, 200, 0.3);
+}
+
+/* 状态图标 */
+.status-icon {
+  margin-right: 15rpx;
+  font-size: 38rpx;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+  gap: 40rpx;
+}
+
+.btn {
+  padding: 20rpx 40rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+}
+
+/* 上传按钮样式 */
+.btn:first-child { background: #2196F3; color: white; }
+
+/* 开始导航按钮样式 */
+.btn:nth-child(2) { background: #4CAF50; color: white; }
+
+/* 结束导航按钮样式 */
+.btn:nth-child(3) { background: #f44336; color: white; }
+

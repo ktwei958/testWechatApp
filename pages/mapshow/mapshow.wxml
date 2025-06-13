@@ -1,0 +1,78 @@
+<!-- 上传按钮和地图组件 -->
+<view class="container" >
+  <map 
+  longitude="{{mapCenter.longitude}}"
+  latitude="{{mapCenter.latitude}}"
+  id="kmlMap"
+  style="width: 100%; height: calc(80vh - 160rpx);"
+  markers="{{markers}}"      
+  polyline="{{polylines}}" 
+  include-points="{{includePoints}}"
+  enable-3D  
+  show-compass 
+  show-location             
+  enable-zoom  
+  show-scale
+  enable-satellite
+  enable-rotate
+  enable-building          
+  ></map>
+   <!-- 路线信息与控制按钮 -->
+   <view class="info-box">
+  <!-- 路线信息行 -->
+  <view class="info-row">
+    <text class="info-item">
+      <text class="info-icon">📏</text> 路线长度：{{routeLength}}公里
+    </text>
+    
+  </view>
+  
+  <!-- 高度信息行 -->
+  <view class="info-row">
+    <text class="info-item">
+      <text class="info-icon">⬆️</text> 爬升高度：{{climb}}米
+    </text>
+    <text class="info-item">
+      <text class="info-icon">⬇️</text> 下降高度：{{descent}}米
+    </text>
+  </view>
+  
+  <!-- 导航状态 -->
+  <view class="status-container">
+    <block wx:if="{{isNavigating}}">
+      <view 
+        class="status-item {{isDeviated ? 'deviated' : 'on-track'}}"
+        wx:if="{{isDeviated}}"
+      >
+        <text class="status-icon">⚠️</text>
+        <text>状态：已偏离路线！</text>
+      </view>
+      <view 
+        class="status-item {{isDeviated ? 'deviated' : 'on-track'}}"
+        wx:else
+      >
+        <text class="status-icon">✅</text>
+        <text>状态：沿路线导航中</text>
+      </view>
+    </block>
+    
+    <!-- 非导航状态 -->
+    <block wx:else>
+      <view class="status-item inactive">
+        <text class="status-icon">⏳</text>
+        <text>状态：未开始导航</text>
+      </view>
+    </block>
+  </view>
+</view>
+
+  <view class="btn-group">
+    <button bindtap="chooseKmlFile" class="btn">上传KML路线</button>
+    <button bindtap="startNav" class="btn" wx:if="{{!isNavigating}}">开始导航</button>
+    <button bindtap="stopNav" class="btn" wx:if="{{isNavigating}}">结束导航</button>
+  </view>
+ 
+
+
+</view>
+
