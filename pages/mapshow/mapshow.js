@@ -40,22 +40,57 @@ function getPathTotalLength(linePoints) {
   }, 0);
 }
 
-// 使用加权移动平均平滑高程数据
-function smoothElevation(points) {
-  return points.map((p, i, arr) => {
-    // 第一点和最后一点不处理
-    if (i === 0 || i === arr.length - 1) return p;
+/**
+ * 高斯滤波处理轨迹点高度数据
+ * @param {Array} points - 包含经纬度和高度的点数组
+ * @param {number} sigma - 标准差（默认1.0）
+ * @returns {Array} - 滤波后的点数组
+ */
+function gaussianFilter(points, sigma = 1.0) {
+  if (!points || points.length < 2) return points;
+  
+  // 计算高斯核
+  const kernelSize = Math.max(3, Math.ceil(sigma * 3) * 2 + 1);
+  const halfKernel = Math.floor(kernelSize / 2);
+  const kernel = [];
+  let kernelSum = 0;
+  
+  for (let i = -halfKernel; i <= halfKernel; i++) {
+    const weight = Math.exp(-(i * i) / (2 * sigma * sigma));
+    kernel.push(weight);
+    kernelSum += weight;
+  }
+  
+  // 归一化核函数
+  for (let i = 0; i < kernel.length; i++) {
+    kernel[i] /= kernelSum;
+  }
+  
+  const filteredPoints = [...points];
+  
+  for (let i = 0; i < points.length; i++) {
+    let sum = 0;
+    let weightSum = 0;
     
-    const prev = arr[i-1].altitude;
-    const current = p.altitude;
-    const next = arr[i+1].altitude;
+    // 应用高斯核
+    for (let j = -halfKernel; j <= halfKernel; j++) {
+      const idx = i + j;
+      if (idx >= 0 && idx < points.length) {
+        sum += points[idx].altitude * kernel[j + halfKernel];
+        weightSum += kernel[j + halfKernel];
+      }
+    }
     
-    return {
-      ...p,
-      altitude: (prev * 0.2) + (current * 0.6) + (next * 0.2)
+    // 更新滤波后的高度值
+    filteredPoints[i] = {
+      ...points[i],
+      altitude: sum / weightSum
     };
-  });
+  }
+  
+  return filteredPoints;
 }
+
 
 
 //计算路线的爬升高度和下降高度
@@ -312,7 +347,7 @@ Page({
     }
 
     //对高度数据进行平滑处理
-    const points =smoothElevation(newIncludePoints);
+    const points =gaussianFilter(newIncludePoints,2.0);
     //根据路线数据计算爬升高度和下降高度
     const {climb,descent} = calculateElevationChange(points);
     // ---------------------- 步骤4：绑定数据到视图 ----------------------
